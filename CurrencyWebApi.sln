@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyWebApi", "CurrencyWebApi\CurrencyWebApi.csproj", "{719047C9-19FC-449A-B409-0510F699D442}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyWebApi.Tests", "CurrencyWebApi.Tests\CurrencyWebApi.Tests.csproj", "{02B4CFA7-5434-4B1C-8598-4F3F76783956}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{719047C9-19FC-449A-B409-0510F699D442}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{719047C9-19FC-449A-B409-0510F699D442}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{719047C9-19FC-449A-B409-0510F699D442}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{719047C9-19FC-449A-B409-0510F699D442}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02B4CFA7-5434-4B1C-8598-4F3F76783956}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02B4CFA7-5434-4B1C-8598-4F3F76783956}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02B4CFA7-5434-4B1C-8598-4F3F76783956}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02B4CFA7-5434-4B1C-8598-4F3F76783956}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A3CD15EA-AE71-477C-966E-E8327CE94D5B}
+	EndGlobalSection
+EndGlobal
