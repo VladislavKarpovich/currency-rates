@@ -1,5 +1,11 @@
 .vs/
 CurrencyWebApi/bin/
 CurrencyWebApi/obj/
+Abstracts/bin/
+Abstracts/obj/
+Models/bin/
+Models/obj/
+MyfinParser/bin/
+MyfinParser/obj/
 packages/
 Add_Data/
