@@ -7,11 +7,11 @@ using CurrencyWebApi.Models;
 
 namespace MyfinParser
 {
-    class CurrencyParser : IParser
+    public class Parser : IParser
     {
         public IEnumerable<CurrencyRate> Parse()
         {
-            var cities = ParseCities();
+            var cities = CityParser.ParseCities();
             foreach (var city in cities)
             {
                 var rates = ParseRateFromCity(city);
@@ -22,27 +22,9 @@ namespace MyfinParser
             }
         }
 
-        public IEnumerable<City> ParseCities()
-        {
-            var html = @"https://myfin.by/currency/minsk";
-            HtmlWeb web = new HtmlWeb();
-            var htmlDoc = web.Load(html);
-            const string xpath = "//*[@id=\"modal-list-menu\"]/div/div/div[2]/div[2]/div/ul/li/a";
-            var colomsContainers = htmlDoc.DocumentNode.SelectNodes(xpath);
-            foreach (var item in colomsContainers)
-            {
-                var link = item.GetAttributeValue("data-slug", "none");
-                var name = item.InnerText;
-                if (link != "none")
-                {
-                    yield return new City { Name = name, Link = link };
-                }
-            }
-        }
-
         private IEnumerable<CurrencyRate> ParseRateFromCity(City city)
         {
-            var html = @"https://myfin.by/currency/" + city.Link;
+            var html = $"https://myfin.by/currency/${city.Link}";
             HtmlWeb web = new HtmlWeb();
             var htmlDoc = web.Load(html);
             const string xpath = "//*[@id=\"workarea\"]/div[2]/div[2]/div/table/tbody/tr";

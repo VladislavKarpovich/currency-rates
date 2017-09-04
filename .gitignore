@@ -1,6 +1,12 @@
 .vs/
 CurrencyWebApi/bin/
 CurrencyWebApi/obj/
+CurrencyDatabase/bin/
+CurrencyDatabase/obj/
+CurrencyDatabase/CurrencyDatabase.dbmdl
+CurrencyDatabase/CurrencyDatabase.jfm
+Backgrounds/bin/
+Backgrounds/obj/
 Abstracts/bin/
 Abstracts/obj/
 Models/bin/

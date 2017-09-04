@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CurrencyWebApi.Models
+namespace Models
 {
     public class CurrencyRate
     {
@@ -19,6 +19,5 @@ namespace CurrencyWebApi.Models
         public double BYR_RUB_Bid { get; set; }
         public double EUR_USD_Ask { get; set; }
         public double EUR_USD_Bid { get; set; }
-
     }
 }

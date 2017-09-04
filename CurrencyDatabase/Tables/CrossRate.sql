@@ -1,0 +1,10 @@
+﻿CREATE TABLE [dbo].[CrossRate]
+(
+	[CrossRateId] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [CurrencyIdFrom] UNIQUEIDENTIFIER NOT NULL, 
+    [CurrencyIdTo] UNIQUEIDENTIFIER NOT NULL, 
+    [DateTime] DATETIME NULL, 
+    [Bid] FLOAT NOT NULL, 
+    [Ask] FLOAT NOT NULL, 
+    [OfficeId] UNIQUEIDENTIFIER NOT NULL, 
+)

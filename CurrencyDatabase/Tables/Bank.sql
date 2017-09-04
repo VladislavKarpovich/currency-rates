@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[Bank]
+(
+	[BankId] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [Name] NCHAR(255) NOT NULL
+)

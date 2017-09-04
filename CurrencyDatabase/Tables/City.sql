@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[City]
+(
+	[CityId] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [Name] NCHAR(255) NOT NULL
+)

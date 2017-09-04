@@ -1,4 +1,4 @@
-﻿using CurrencyWebApi.Models;
+﻿using Models;
 using System.Collections.Generic;
 
 namespace Abstracts
