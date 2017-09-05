@@ -59,6 +59,7 @@
     <Folder Include="Properties" />
     <Folder Include="Tables" />
     <Folder Include="Views" />
+    <Folder Include="PostDeployment" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\City.sql" />
@@ -71,5 +72,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CurrencyDatabase.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="PostDeployment\Script.PostDeployment.Citiessql.sql" />
   </ItemGroup>
 </Project>

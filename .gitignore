@@ -1,4 +1,8 @@
 .vs/
+DataStructs/bin/
+DataStructs/obj/
+Implements/bin/
+Implements/obj/
 CurrencyWebApi/bin/
 CurrencyWebApi/obj/
 CurrencyDatabase/bin/
@@ -11,7 +15,7 @@ Abstracts/bin/
 Abstracts/obj/
 Models/bin/
 Models/obj/
-MyfinParser/bin/
-MyfinParser/obj/
+MyfinParserImplement/bin/
+MyfinParserImplement/obj/
 packages/
 Add_Data/

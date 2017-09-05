@@ -51,6 +51,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -64,14 +67,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bank.cs" />
-    <Compile Include="City.cs" />
-    <Compile Include="CrossRate.cs" />
-    <Compile Include="CrossRateView.cs" />
-    <Compile Include="Currency.cs" />
-    <Compile Include="CurrencyRate.cs" />
-    <Compile Include="Office.cs" />
-    <Compile Include="OfficeView.cs" />
+    <Compile Include="Bank.cs">
+      <DependentUpon>CurrencyRates.tt</DependentUpon>
+    </Compile>
+    <Compile Include="City.cs">
+      <DependentUpon>CurrencyRates.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CrossRate.cs">
+      <DependentUpon>CurrencyRates.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CrossRateView.cs">
+      <DependentUpon>CurrencyRates.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Currency.cs">
+      <DependentUpon>CurrencyRates.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CurrencyRates.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CurrencyRates.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CurrencyRates.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CurrencyRates.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CurrencyRates.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CurrencyRates.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Office.cs">
+      <DependentUpon>CurrencyRates.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OfficeView.cs">
+      <DependentUpon>CurrencyRates.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -90,8 +121,29 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <EntityDeploy Include="CurrencyRates.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CurrencyRates.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="CurrencyRates.edmx.diagram">
+      <DependentUpon>CurrencyRates.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CurrencyRates.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CurrencyRates.Context.cs</LastGenOutput>
+      <DependentUpon>CurrencyRates.edmx</DependentUpon>
+    </Content>
+    <Content Include="CurrencyRates.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CurrencyRates.edmx</DependentUpon>
+      <LastGenOutput>CurrencyRates.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MyfinParser
+namespace MyfinParserImplement
 {
     internal static class ParserUtils
     {

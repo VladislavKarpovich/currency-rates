@@ -1,10 +1,6 @@
 ﻿using System.Web.Http;
 using Ninject;
 using Owin;
-using Abstracts;
-using CurrencyWebApi.Repositories;
-using MyfinParser;
-using CurrencyWebApi.Models;
 using Ninject.Web.Common.OwinHost;
 using Ninject.Web.WebApi.OwinHost;
 using Ninject.Modules;
