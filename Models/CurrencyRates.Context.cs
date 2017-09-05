@@ -20,7 +20,7 @@ namespace Models
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            throw new UnintentionalCodeFirstException();
+            
         }
     
         public virtual DbSet<Bank> Bank { get; set; }
