@@ -68,40 +68,40 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bank.cs">
-      <DependentUpon>CurrencyRates.tt</DependentUpon>
+      <DependentUpon>CurrencyDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="City.cs">
-      <DependentUpon>CurrencyRates.tt</DependentUpon>
+      <DependentUpon>CurrencyDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="CrossRate.cs">
-      <DependentUpon>CurrencyRates.tt</DependentUpon>
+      <DependentUpon>CurrencyDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="CrossRateView.cs">
-      <DependentUpon>CurrencyRates.tt</DependentUpon>
+      <DependentUpon>CurrencyDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Currency.cs">
-      <DependentUpon>CurrencyRates.tt</DependentUpon>
+      <DependentUpon>CurrencyDatabase.tt</DependentUpon>
     </Compile>
-    <Compile Include="CurrencyRates.Context.cs">
+    <Compile Include="CurrencyDatabase.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CurrencyRates.Context.tt</DependentUpon>
+      <DependentUpon>CurrencyDatabase.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="CurrencyRates.cs">
+    <Compile Include="CurrencyDatabase.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CurrencyRates.tt</DependentUpon>
+      <DependentUpon>CurrencyDatabase.tt</DependentUpon>
     </Compile>
-    <Compile Include="CurrencyRates.Designer.cs">
+    <Compile Include="CurrencyDatabase.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CurrencyRates.edmx</DependentUpon>
+      <DependentUpon>CurrencyDatabase.edmx</DependentUpon>
     </Compile>
     <Compile Include="Office.cs">
-      <DependentUpon>CurrencyRates.tt</DependentUpon>
+      <DependentUpon>CurrencyDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="OfficeView.cs">
-      <DependentUpon>CurrencyRates.tt</DependentUpon>
+      <DependentUpon>CurrencyDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -121,28 +121,26 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="CurrencyRates.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CurrencyRates.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.Config" />
-    <None Include="CurrencyRates.edmx.diagram">
-      <DependentUpon>CurrencyRates.edmx</DependentUpon>
+    <EntityDeploy Include="CurrencyDatabase.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CurrencyDatabase.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="CurrencyDatabase.edmx.diagram">
+      <DependentUpon>CurrencyDatabase.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CurrencyRates.Context.tt">
+    <Content Include="CurrencyDatabase.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CurrencyRates.Context.cs</LastGenOutput>
-      <DependentUpon>CurrencyRates.edmx</DependentUpon>
+      <DependentUpon>CurrencyDatabase.edmx</DependentUpon>
+      <LastGenOutput>CurrencyDatabase.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="CurrencyRates.tt">
+    <Content Include="CurrencyDatabase.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CurrencyRates.edmx</DependentUpon>
-      <LastGenOutput>CurrencyRates.cs</LastGenOutput>
+      <DependentUpon>CurrencyDatabase.edmx</DependentUpon>
+      <LastGenOutput>CurrencyDatabase.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

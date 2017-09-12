@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace MyfinParserImplement
 {
@@ -6,7 +7,8 @@ namespace MyfinParserImplement
     {
         public static DateTime? ParseDateTime(string time)
         {
-            var numbers = time.Split(':');
+            var timeString = ParseString(time);
+            var numbers = timeString.Split(':');
 
             var date = DateTime.Today;
             if (int.TryParse(numbers[0], out int hours) && int.TryParse(numbers[0], out int min))
@@ -33,6 +35,11 @@ namespace MyfinParserImplement
                 return res;
             }
             return 0;
+        }
+
+        public static string ParseString(string str)
+        {
+            return Regex.Replace(str, @"\t|\n|\r|\s+", "");
         }
     }
 }

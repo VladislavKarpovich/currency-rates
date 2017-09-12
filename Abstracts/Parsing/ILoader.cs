@@ -5,6 +5,6 @@ namespace Abstracts
 {
     public interface ILoader
     {
-         HtmlDocument Load(string url);
+         Task<HtmlDocument> LoadAsync(string url);
     }
 }

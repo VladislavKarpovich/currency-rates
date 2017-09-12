@@ -24,7 +24,6 @@ namespace CurrencyWebApi
 
             NinjectConfig.Register(app, config, kernel);
             WebApiConfig.Register(config);
-
         }
     }
 }

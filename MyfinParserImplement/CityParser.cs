@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace MyfinParserImplement
 {
-    class CityParser : ICityParser
+    public class CityParser : ICityParser
     {
         public IEnumerable<string> Parse(HtmlDocument htmlDoc)
         {
@@ -16,7 +16,7 @@ namespace MyfinParserImplement
                 var link = item.GetAttributeValue("data-slug", "none");
                 if (link != "none")
                 {
-                    yield return $"https://myfin.by/currency/${link}";
+                    yield return $"https://myfin.by/currency/{link}";
                 }
             }
         }

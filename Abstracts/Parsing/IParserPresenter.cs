@@ -6,6 +6,6 @@ namespace Abstracts
 {
     public interface IParserPresenter
     {
-        IEnumerable<CurrencyRate> Parse();
+        Task<IEnumerable<CurrencyRate>> ParseAsync();
     }
 }

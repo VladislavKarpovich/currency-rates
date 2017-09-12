@@ -1,15 +1,19 @@
 ﻿using Abstracts;
 using HtmlAgilityPack;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Implements
 {
     public class Loader: ILoader
     {
-        public HtmlDocument Load(string url)
+        public async Task<HtmlDocument> LoadAsync(string url)
         {
-            HtmlWeb web = new HtmlWeb();
-            return web.Load(url);
+            var http = new HttpClient();
+            var html = await http.GetStringAsync(url);
+            var doc = new HtmlDocument();
+            doc.LoadHtml(html);
+            return doc;
         }
     }
 }

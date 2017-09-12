@@ -21,10 +21,11 @@ namespace ExadelPractice
 
             kernel.Load(new INinjectModule[]
             {
-                new Repository()
+                new Repository(),
+                new Service(),
+                new Parser(),
+                new BackgroundScope()
             });
-
-           
 
             return kernel;
         }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Implements
 {
-    class ParserLoader : IParserLoader
+    public class ParserLoader : IParserLoader
     {
         private readonly Dictionary<string, ICurrencyRateParser> _parsers = new Dictionary<string, ICurrencyRateParser>
         {
