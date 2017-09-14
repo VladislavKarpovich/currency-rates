@@ -67,6 +67,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActualCrossRate.cs">
+      <DependentUpon>CurrencyDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ActualCrossView.cs">
+      <DependentUpon>CurrencyDatabase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Bank.cs">
       <DependentUpon>CurrencyDatabase.tt</DependentUpon>
     </Compile>
@@ -96,6 +102,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CurrencyDatabase.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="C__RefactorLog.cs">
+      <DependentUpon>CurrencyDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Office.cs">
       <DependentUpon>CurrencyDatabase.tt</DependentUpon>

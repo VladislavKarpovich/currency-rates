@@ -3,11 +3,13 @@ using Abstracts.Repositories;
 using Abstracts.Services;
 using Implements;
 using Implements.Repositories;
+using Implements.Repositories.Cache;
 using Implements.Services;
 using Models;
 using MyfinParserImplement;
 using Ninject;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ConsoleAppForParsingTests
@@ -24,18 +26,32 @@ namespace ConsoleAppForParsingTests
                 kernel.Bind<IParserLoader>().To<ParserLoader>();
                 kernel.Bind<IParserPresenter>().To<ParserPresenter>();
 
-                kernel.Bind<IDbRepository<Bank>>().To<BankRepository>();
-                kernel.Bind<IDbRepository<City>>().To<CityRepository>();
-                kernel.Bind<IDbRepository<Currency>>().To<CurrencyRepository>();
-                kernel.Bind<IDbRepository<Office>>().To<OfficeRepository>();
-                kernel.Bind<ICrossRateRepository>().To<CrossRateRepository>();
+                kernel.Bind<IRepository<Bank>>().To<BankCacheRepository>().InSingletonScope();
+                kernel.Bind<IRepository<City>>().To<CityCacheRepository>().InSingletonScope();
+                kernel.Bind<IRepository<Currency>>().To<CurrencyCacheRepository>().InSingletonScope();
+                kernel.Bind<IRepository<Office>>().To<OfficeCacheRepository>().InSingletonScope();
+
+                kernel.Bind<ICrossRateRepository<CrossRate>>().To<CrossRateRepository>();
+                kernel.Bind<ICrossRateRepository<ActualCrossRate>>().To<ActualCrossRateRepository>();
+
+                kernel.Bind<IRepository<Bank>>().To<BankRepository>().WhenInjectedInto<BankCacheRepository>();
+                kernel.Bind<IRepository<City>>().To<CityRepository>().WhenInjectedInto<CityCacheRepository>();
+                kernel.Bind<IRepository<Currency>>().To<CurrencyRepository>().WhenInjectedInto<CurrencyCacheRepository>();
+                kernel.Bind<IRepository<Office>>().To<OfficeRepository>().WhenInjectedInto<OfficeCacheRepository>();
+
                 kernel.Bind<CurrencyDatabaseEntities>().ToSelf().InTransientScope();
 
                 kernel.Bind<IBankService>().To<BankService>();
                 kernel.Bind<IParserProcess>().To<ParserProcess>();
                 var parsing = kernel.Get<IParserProcess>();
 
-                AsyncJob(parsing).Wait();
+                for (int i = 0; i < 10; i++)
+                {
+                    AsyncJob(parsing).Wait();
+                    Console.WriteLine(i);
+                    Thread.Sleep(5000);
+                }
+                
                 Console.WriteLine("the end");
                 Console.ReadKey();
             }

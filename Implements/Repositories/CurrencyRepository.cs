@@ -3,14 +3,11 @@ using Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Migrations;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Implements.Repositories
 {
-    public class CurrencyRepository : IDbRepository<Currency>
+    public class CurrencyRepository : IRepository<Currency>
     {
 
         private readonly CurrencyDatabaseEntities _db;
@@ -18,18 +15,14 @@ namespace Implements.Repositories
 
         public Task<int> CountAsync => _db.Currency.CountAsync();
 
-        public async Task<Currency> FindOrCreateAsync(Currency currency)
+        public async Task<Currency> CreateAsync(Currency item)
         {
-            var model = await _db.Currency.FirstOrDefaultAsync(c => c.Name == currency.Name);
-            if (model != null)
-            {
-                return model;
-            }
-
-            _db.Currency.Add(currency);
+            _db.Currency.Add(item);
             await _db.SaveChangesAsync();
-            return await _db.Currency.FindAsync(currency.CurrencyId);
+            return await _db.Currency.FindAsync(item.CurrencyId);
         }
+
+        public Task<Currency> FindAsync(Currency cur) => _db.Currency.FirstOrDefaultAsync(c => c.Name == cur.Name);
 
         public async Task<IEnumerable<Currency>> GetAllAsync() => await _db.Currency.ToListAsync();
 

@@ -26,5 +26,7 @@ namespace Models
         public string Address { get; set; }
         public string Contacts { get; set; }
         public string Tittle { get; set; }
+        public string City { get; set; }
+        public string Bank { get; set; }
     }
 }

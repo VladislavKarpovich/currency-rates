@@ -2,10 +2,10 @@
 using Abstracts.Repositories;
 using Abstracts.Services;
 using DataStructs;
+using Implements.Repositories;
 using Models;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,26 +13,29 @@ namespace Implements.Services
 {
     public class ParserProcess : IParserProcess
     {
-        private readonly IDbRepository<Bank> _bankRepository;
-        private readonly IDbRepository<City> _cityRepository;
-        private readonly IDbRepository<Currency> _currencRepository;
-        private readonly IDbRepository<Office> _officeRepository;
-        private readonly ICrossRateRepository _crossRateRepository;
+        private readonly IRepository<Bank> _bankRepository;
+        private readonly IRepository<City> _cityRepository;
+        private readonly IRepository<Currency> _currencRepository;
+        private readonly IRepository<Office> _officeRepository;
+        private readonly ICrossRateRepository<CrossRate> _crossRateRepository;
+        private readonly ICrossRateRepository<ActualCrossRate> _actualCrossRateRepository;
         private readonly IParserPresenter _parser;
 
         public ParserProcess(
-            IDbRepository<Bank> bankRepository,
-            IDbRepository<City> cityRepository,
-            IDbRepository<Currency> currencRepository,
-            IDbRepository<Office> officeRepository,
-            ICrossRateRepository crossRateRepository,
-            IParserPresenter parser)
+            IRepository<Bank> bankRepository,
+            IRepository<City> cityRepository,
+            IRepository<Currency> currencRepository,
+            IRepository<Office> officeRepository,
+            ICrossRateRepository<CrossRate> crossRateRepository,
+            ICrossRateRepository<ActualCrossRate> actualCrossRateRepository,
+        IParserPresenter parser)
         {
             _bankRepository = bankRepository;
             _cityRepository = cityRepository;
             _currencRepository = currencRepository;
             _officeRepository = officeRepository;
             _crossRateRepository = crossRateRepository;
+            _actualCrossRateRepository = actualCrossRateRepository;
             _parser = parser;
 
         }
@@ -40,7 +43,9 @@ namespace Implements.Services
         public async Task RunAsync()
         {
             var parsResult = await _parser.ParseAsync();
+
             var nodes = parsResult as List<CurrencyRate> ?? parsResult.ToList();
+            await _actualCrossRateRepository.CleanTable();
             foreach (var node in nodes)
             {
                 await RecordAsync(node);
@@ -60,11 +65,18 @@ namespace Implements.Services
                 await GetCrossRateAsync("BYR", "RUB", node.BYR_RUB_Bid, node.BYR_RUB_Ask, node.DateTime, office.OfficeId),
                 await GetCrossRateAsync("EUR", "USD", node.BYR_EUR_Bid, node.BYR_USD_Ask, node.DateTime, office.OfficeId)
             };
-
             foreach (var rate in crossRates)
             {
                 await _crossRateRepository.AddCrossRateAsync(rate);
-                Debug.WriteLine("Recoding");
+                await _actualCrossRateRepository.AddCrossRateAsync(new ActualCrossRate
+                {
+                    OfficeId = rate.OfficeId,
+                    Bid = rate.Bid,
+                    Ask = rate.Ask,
+                    DateTime = rate.DateTime,
+                    CurrencyIdFrom = rate.CurrencyIdFrom,
+                    CurrencyIdTo = rate.CurrencyIdTo
+                });
             }
         }
 

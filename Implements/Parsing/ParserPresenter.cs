@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DataStructs;
-using System.Diagnostics;
 using System.Threading;
-using System.Linq;
 
 namespace Implements
 {
@@ -71,10 +69,6 @@ namespace Implements
                             lock (_parseUrlSyncKey)
                             {
                                 result.AddRange(nodes);
-                                foreach (var item in nodes)
-                                {
-                                    Debug.WriteLine(item);
-                                }
                             }
                         }
                         finally

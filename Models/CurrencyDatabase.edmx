@@ -4,7 +4,25 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ActualCrossRate">
+          <Key>
+            <PropertyRef Name="ActualCrossRateId" />
+          </Key>
+          <Property Name="ActualCrossRateId" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CurrencyIdFrom" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CurrencyIdTo" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DateTime" Type="datetime" />
+          <Property Name="Bid" Type="float" Nullable="false" />
+          <Property Name="Ask" Type="float" Nullable="false" />
+          <Property Name="OfficeId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
         <EntityType Name="Bank">
           <Key>
             <PropertyRef Name="BankId" />
@@ -50,6 +68,34 @@
           <Property Name="Tittle" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'CurrencyDatabase.dbo.ActualCrossView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ActualCrossView">
+          <Key>
+            <PropertyRef Name="ActualCrossRateId" />
+            <PropertyRef Name="CurrencyIdFrom" />
+            <PropertyRef Name="CurrencyIdTo" />
+            <PropertyRef Name="Bid" />
+            <PropertyRef Name="Ask" />
+            <PropertyRef Name="OfficeId" />
+            <PropertyRef Name="City" />
+            <PropertyRef Name="Bank" />
+          </Key>
+          <Property Name="ActualCrossRateId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CurrencyIdFrom" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CurrencyIdTo" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DateTime" Type="datetime" />
+          <Property Name="Bid" Type="float" Nullable="false" />
+          <Property Name="Ask" Type="float" Nullable="false" />
+          <Property Name="OfficeId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CurrencyFrom" Type="nchar" MaxLength="5" />
+          <Property Name="CurrencyTo" Type="nchar" MaxLength="5" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Contacts" Type="nvarchar(max)" />
+          <Property Name="Tittle" Type="nvarchar(max)" />
+          <Property Name="City" Type="nchar" MaxLength="255" Nullable="false" />
+          <Property Name="Bank" Type="nchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'CurrencyDatabase.dbo.CrossRateView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CrossRateView">
           <Key>
@@ -59,6 +105,8 @@ warning 6002: The table/view 'CurrencyDatabase.dbo.CrossRateView' does not have 
             <PropertyRef Name="Bid" />
             <PropertyRef Name="Ask" />
             <PropertyRef Name="OfficeId" />
+            <PropertyRef Name="City" />
+            <PropertyRef Name="Bank" />
           </Key>
           <Property Name="CrossRateId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CurrencyIdFrom" Type="uniqueidentifier" Nullable="false" />
@@ -72,6 +120,8 @@ warning 6002: The table/view 'CurrencyDatabase.dbo.CrossRateView' does not have 
           <Property Name="Address" Type="nvarchar(max)" />
           <Property Name="Contacts" Type="nvarchar(max)" />
           <Property Name="Tittle" Type="nvarchar(max)" />
+          <Property Name="City" Type="nchar" MaxLength="255" Nullable="false" />
+          <Property Name="Bank" Type="nchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'CurrencyDatabase.dbo.OfficeView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -93,11 +143,31 @@ warning 6002: The table/view 'CurrencyDatabase.dbo.OfficeView' does not have a p
           <Property Name="City" Type="nchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityContainer Name="ModelsStoreContainer">
+          <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActualCrossRate" EntityType="Self.ActualCrossRate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Bank" EntityType="Self.Bank" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CrossRate" EntityType="Self.CrossRate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Office" EntityType="Self.Office" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActualCrossView" EntityType="Self.ActualCrossView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ActualCrossView].[ActualCrossRateId] AS [ActualCrossRateId], 
+    [ActualCrossView].[CurrencyIdFrom] AS [CurrencyIdFrom], 
+    [ActualCrossView].[CurrencyIdTo] AS [CurrencyIdTo], 
+    [ActualCrossView].[DateTime] AS [DateTime], 
+    [ActualCrossView].[Bid] AS [Bid], 
+    [ActualCrossView].[Ask] AS [Ask], 
+    [ActualCrossView].[OfficeId] AS [OfficeId], 
+    [ActualCrossView].[CurrencyFrom] AS [CurrencyFrom], 
+    [ActualCrossView].[CurrencyTo] AS [CurrencyTo], 
+    [ActualCrossView].[Address] AS [Address], 
+    [ActualCrossView].[Contacts] AS [Contacts], 
+    [ActualCrossView].[Tittle] AS [Tittle], 
+    [ActualCrossView].[City] AS [City], 
+    [ActualCrossView].[Bank] AS [Bank]
+    FROM [dbo].[ActualCrossView] AS [ActualCrossView]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="CrossRateView" EntityType="Self.CrossRateView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [CrossRateView].[CrossRateId] AS [CrossRateId], 
@@ -111,7 +181,9 @@ warning 6002: The table/view 'CurrencyDatabase.dbo.OfficeView' does not have a p
     [CrossRateView].[CurrencyTo] AS [CurrencyTo], 
     [CrossRateView].[Address] AS [Address], 
     [CrossRateView].[Contacts] AS [Contacts], 
-    [CrossRateView].[Tittle] AS [Tittle]
+    [CrossRateView].[Tittle] AS [Tittle], 
+    [CrossRateView].[City] AS [City], 
+    [CrossRateView].[Bank] AS [Bank]
     FROM [dbo].[CrossRateView] AS [CrossRateView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="OfficeView" EntityType="Self.OfficeView" store:Type="Views" store:Schema="dbo">
@@ -127,8 +199,7 @@ warning 6002: The table/view 'CurrencyDatabase.dbo.OfficeView' does not have a p
     FROM [dbo].[OfficeView] AS [OfficeView]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -184,6 +255,8 @@ warning 6002: The table/view 'CurrencyDatabase.dbo.OfficeView' does not have a p
             <PropertyRef Name="Bid" />
             <PropertyRef Name="Ask" />
             <PropertyRef Name="OfficeId" />
+            <PropertyRef Name="City" />
+            <PropertyRef Name="Bank" />
           </Key>
           <Property Name="CrossRateId" Type="Guid" Nullable="false" />
           <Property Name="CurrencyIdFrom" Type="Guid" Nullable="false" />
@@ -197,6 +270,8 @@ warning 6002: The table/view 'CurrencyDatabase.dbo.OfficeView' does not have a p
           <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Contacts" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Tittle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="255" FixedLength="true" Unicode="true" />
+          <Property Name="Bank" Type="String" Nullable="false" MaxLength="255" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="OfficeView">
           <Key>
@@ -223,7 +298,54 @@ warning 6002: The table/view 'CurrencyDatabase.dbo.OfficeView' does not have a p
           <EntitySet Name="Office" EntityType="Self.Office" />
           <EntitySet Name="CrossRateView" EntityType="Self.CrossRateView" />
           <EntitySet Name="OfficeView" EntityType="Self.OfficeView" />
+          <EntitySet Name="ActualCrossRate" EntityType="Models.ActualCrossRate" />
+          <EntitySet Name="ActualCrossView" EntityType="Models.ActualCrossView" />
+          <EntitySet Name="C__RefactorLog" EntityType="Models.C__RefactorLog" />
         </EntityContainer>
+        <EntityType Name="ActualCrossRate">
+          <Key>
+            <PropertyRef Name="ActualCrossRateId" />
+          </Key>
+          <Property Name="CurrencyIdFrom" Nullable="false" Type="Guid" />
+          <Property Name="CurrencyIdTo" Nullable="false" Type="Guid" />
+          <Property Name="DateTime" Precision="3" Type="DateTime" />
+          <Property Name="Bid" Nullable="false" Type="Double" />
+          <Property Name="Ask" Nullable="false" Type="Double" />
+          <Property Name="OfficeId" Nullable="false" Type="Guid" />
+          <Property Name="ActualCrossRateId" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="ActualCrossView">
+          <Key>
+            <PropertyRef Name="CurrencyIdFrom" />
+            <PropertyRef Name="CurrencyIdTo" />
+            <PropertyRef Name="Bid" />
+            <PropertyRef Name="Ask" />
+            <PropertyRef Name="OfficeId" />
+            <PropertyRef Name="City" />
+            <PropertyRef Name="Bank" />
+            <PropertyRef Name="ActualCrossRateId" />
+          </Key>
+          <Property Name="CurrencyIdFrom" Nullable="false" Type="Guid" />
+          <Property Name="CurrencyIdTo" Nullable="false" Type="Guid" />
+          <Property Name="DateTime" Precision="3" Type="DateTime" />
+          <Property Name="Bid" Nullable="false" Type="Double" />
+          <Property Name="Ask" Nullable="false" Type="Double" />
+          <Property Name="OfficeId" Nullable="false" Type="Guid" />
+          <Property Name="CurrencyFrom" MaxLength="5" FixedLength="true" Unicode="true" Type="String" />
+          <Property Name="CurrencyTo" MaxLength="5" FixedLength="true" Unicode="true" Type="String" />
+          <Property Name="Address" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="Contacts" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="Tittle" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="City" Nullable="false" MaxLength="255" FixedLength="true" Unicode="true" Type="String" />
+          <Property Name="Bank" Nullable="false" MaxLength="255" FixedLength="true" Unicode="true" Type="String" />
+          <Property Name="ActualCrossRateId" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="C__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="Guid" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -282,6 +404,8 @@ warning 6002: The table/view 'CurrencyDatabase.dbo.OfficeView' does not have a p
           <EntitySetMapping Name="CrossRateView">
             <EntityTypeMapping TypeName="Models.CrossRateView">
               <MappingFragment StoreEntitySet="CrossRateView">
+                <ScalarProperty Name="Bank" ColumnName="Bank" />
+                <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="CrossRateId" ColumnName="CrossRateId" />
                 <ScalarProperty Name="CurrencyIdFrom" ColumnName="CurrencyIdFrom" />
                 <ScalarProperty Name="CurrencyIdTo" ColumnName="CurrencyIdTo" />
@@ -308,6 +432,46 @@ warning 6002: The table/view 'CurrencyDatabase.dbo.OfficeView' does not have a p
                 <ScalarProperty Name="Tittle" ColumnName="Tittle" />
                 <ScalarProperty Name="Bank" ColumnName="Bank" />
                 <ScalarProperty Name="City" ColumnName="City" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActualCrossRate">
+            <EntityTypeMapping TypeName="Models.ActualCrossRate">
+              <MappingFragment StoreEntitySet="ActualCrossRate">
+                <ScalarProperty Name="ActualCrossRateId" ColumnName="ActualCrossRateId" />
+                <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
+                <ScalarProperty Name="Ask" ColumnName="Ask" />
+                <ScalarProperty Name="Bid" ColumnName="Bid" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="CurrencyIdTo" ColumnName="CurrencyIdTo" />
+                <ScalarProperty Name="CurrencyIdFrom" ColumnName="CurrencyIdFrom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActualCrossView">
+            <EntityTypeMapping TypeName="Models.ActualCrossView">
+              <MappingFragment StoreEntitySet="ActualCrossView">
+                <ScalarProperty Name="ActualCrossRateId" ColumnName="ActualCrossRateId" />
+                <ScalarProperty Name="Bank" ColumnName="Bank" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Tittle" ColumnName="Tittle" />
+                <ScalarProperty Name="Contacts" ColumnName="Contacts" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CurrencyTo" ColumnName="CurrencyTo" />
+                <ScalarProperty Name="CurrencyFrom" ColumnName="CurrencyFrom" />
+                <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
+                <ScalarProperty Name="Ask" ColumnName="Ask" />
+                <ScalarProperty Name="Bid" ColumnName="Bid" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="CurrencyIdTo" ColumnName="CurrencyIdTo" />
+                <ScalarProperty Name="CurrencyIdFrom" ColumnName="CurrencyIdFrom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C__RefactorLog">
+            <EntityTypeMapping TypeName="Models.C__RefactorLog">
+              <MappingFragment StoreEntitySet="__RefactorLog">
+                <ScalarProperty Name="OperationKey" ColumnName="OperationKey" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

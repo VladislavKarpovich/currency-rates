@@ -8,25 +8,21 @@ using System.Data.Entity;
 
 namespace Implements.Repositories
 {
-    public class BankRepository : IDbRepository<Bank>
+    public class BankRepository : IRepository<Bank>
     {
         private readonly CurrencyDatabaseEntities _db;
         public BankRepository(CurrencyDatabaseEntities db) => _db = db;
 
         public Task<int> CountAsync => _db.Bank.CountAsync();
 
-        public async Task<Bank> FindOrCreateAsync(Bank bank)
+        public async Task<Bank> CreateAsync(Bank bank)
         {
-            var model = await _db.Bank.FirstOrDefaultAsync(b => b.Name == bank.Name);
-            if(model != null)
-            {
-                return model;
-            }
-
             _db.Bank.Add(bank);
             await _db.SaveChangesAsync();
             return await _db.Bank.FindAsync(bank.BankId);
         }
+
+        public Task<Bank> FindAsync(Bank bank) => _db.Bank.FirstOrDefaultAsync(b => b.Name == bank.Name);
 
         public async Task<IEnumerable<Bank>> GetAllAsync() => await _db.Bank.ToListAsync();
 

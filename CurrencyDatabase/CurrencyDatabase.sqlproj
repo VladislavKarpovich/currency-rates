@@ -69,11 +69,16 @@
     <Build Include="Tables\CrossRate.sql" />
     <Build Include="Views\CrossRateView.sql" />
     <Build Include="Views\OfficeView.sql" />
+    <Build Include="Tables\ActualCrossRate.sql" />
+    <Build Include="Views\ActualCrossView.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CurrencyDatabase.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="PostDeployment\Script.PostDeployment.Citiessql.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="CurrencyDatabase.refactorlog" />
   </ItemGroup>
 </Project>

@@ -19,10 +19,5 @@ namespace DataStructs
         public double BYR_RUB_Bid { get; set; }
         public double EUR_USD_Ask { get; set; }
         public double EUR_USD_Bid { get; set; }
-
-        public override string ToString()
-        {
-            return $"{City} {Office}";
-        }
     }
 }

@@ -6,5 +6,5 @@
     [DateTime] DATETIME NULL, 
     [Bid] FLOAT NOT NULL, 
     [Ask] FLOAT NOT NULL, 
-    [OfficeId] UNIQUEIDENTIFIER NOT NULL, 
+    [OfficeId] UNIQUEIDENTIFIER NOT NULL
 )

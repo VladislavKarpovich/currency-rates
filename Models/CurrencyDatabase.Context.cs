@@ -32,5 +32,8 @@ namespace Models
         public virtual DbSet<Office> Office { get; set; }
         public virtual DbSet<CrossRateView> CrossRateView { get; set; }
         public virtual DbSet<OfficeView> OfficeView { get; set; }
+        public virtual DbSet<ActualCrossRate> ActualCrossRate { get; set; }
+        public virtual DbSet<ActualCrossView> ActualCrossView { get; set; }
+        public virtual DbSet<C__RefactorLog> C__RefactorLog { get; set; }
     }
 }

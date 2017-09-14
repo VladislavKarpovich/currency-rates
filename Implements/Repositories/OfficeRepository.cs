@@ -8,25 +8,19 @@ using System.Data.Entity.Migrations;
 
 namespace Implements.Repositories
 {
-    public class OfficeRepository : IDbRepository<Office>
+    public class OfficeRepository : IRepository<Office>
     {
         private readonly CurrencyDatabaseEntities _db;
         public OfficeRepository(CurrencyDatabaseEntities db) => _db = db;
 
-        public Task<int> CountAsync => _db.Office.CountAsync();
-
-        public async Task<Office> FindOrCreateAsync(Office item)
+        public async Task<Office> CreateAsync(Office item)
         {
-            var model = await _db.Office.FirstOrDefaultAsync(c => c.Tittle == item.Tittle);
-            if (model != null)
-            {
-                return model;
-            }
-
             _db.Office.Add(item);
             await _db.SaveChangesAsync();
             return await _db.Office.FindAsync(item.OfficeId);
         }
+
+        public Task<Office> FindAsync(Office office) => _db.Office.FirstOrDefaultAsync(c => c.Tittle == office.Tittle);
 
         public async Task<IEnumerable<Office>> GetAllAsync() => await _db.Office.ToListAsync();
 

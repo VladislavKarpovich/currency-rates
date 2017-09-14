@@ -3,8 +3,9 @@ using System.Threading.Tasks;
 
 namespace Abstracts.Repositories
 {
-    public interface ICrossRateRepository
+    public interface ICrossRateRepository<T>
     {
-        Task AddCrossRateAsync(CrossRate rate);
+        Task AddCrossRateAsync(T rate);
+        Task CleanTable();
     }
 }

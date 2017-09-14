@@ -56,8 +56,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Events\EventEmitter.cs" />
+    <Compile Include="Repositories\ActualCrossRateRepository.cs" />
+    <Compile Include="Repositories\Cache\BankCacheRepository.cs" />
+    <Compile Include="Repositories\Cache\CityCacheRepository.cs" />
+    <Compile Include="Repositories\Cache\CurrencyCacheRepository.cs" />
+    <Compile Include="Repositories\Cache\OfficeCacheRepository.cs" />
     <Compile Include="Repositories\CurrencyRepository.cs" />
     <Compile Include="Repositories\OfficeRepository.cs" />
+    <Compile Include="Repositories\RepositoryExtensions.cs" />
     <Compile Include="Services\ParserProcess.cs" />
     <Compile Include="Parsing\Loader.cs" />
     <Compile Include="Parsing\ParserLoader.cs" />
@@ -90,8 +97,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Backgrounds\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

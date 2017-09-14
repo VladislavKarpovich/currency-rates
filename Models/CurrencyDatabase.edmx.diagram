@@ -11,7 +11,10 @@
         <EntityTypeShape EntityType="Models.Currency" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Models.Office" Width="1.5" PointX="2.5" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Models.CrossRateView" Width="1.5" PointX="4.75" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.OfficeView" Width="1.5" PointX="6.5" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.OfficeView" Width="1.5" PointX="8.375" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.ActualCrossRate" PointX="2.5" PointY="6" Width="1.5" />
+        <EntityTypeShape EntityType="Models.ActualCrossView" PointX="6.5" PointY="1.375" Width="1.5" />
+        <EntityTypeShape EntityType="Models.C__RefactorLog" Width="1.5" PointX="5.375" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -3,13 +3,14 @@ using Abstracts.Repositories;
 using System.Collections.Generic;
 using Models;
 using System.Threading.Tasks;
+using Implements.Repositories;
 
 namespace Implements.Services
 {
     public class BankService : IBankService
     {
-        private readonly IDbRepository<Bank> _bankRepository;
-        public BankService(IDbRepository<Bank> bankRepository)
+        private readonly IRepository<Bank> _bankRepository;
+        public BankService(IRepository<Bank> bankRepository)
         {
             _bankRepository = bankRepository;
         }

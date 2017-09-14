@@ -150,7 +150,7 @@
     <Compile Include="App_Start\Ninject\Repository.cs" />
     <Compile Include="App_Start\Ninject\Service.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Backgrounds\Parsing.cs" />
+    <Compile Include="Backgrounds\ParsingBackground.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
