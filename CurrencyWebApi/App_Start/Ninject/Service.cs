@@ -8,7 +8,7 @@ namespace CurrencyWebApi.App_Start.Ninject
     {
         public override void Load()
         {
-            Bind<IBankService>().To<BankService>();
+            Bind(typeof(IService<>)).To(typeof(Service<>));
             Bind<IParserProcess>().To<ParserProcess>();
         }
     }

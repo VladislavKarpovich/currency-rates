@@ -73,7 +73,7 @@
     <Compile Include="Repositories\BankRepository.cs" />
     <Compile Include="Repositories\CityRepository.cs" />
     <Compile Include="Repositories\CrossRateRepository.cs" />
-    <Compile Include="Services\BankService.cs" />
+    <Compile Include="Services\Service.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Abstracts\Abstracts.csproj">
