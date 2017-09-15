@@ -3,6 +3,8 @@ using ExadelPractice;
 using Microsoft.Owin;
 using Owin;
 using System.Web.Http;
+using Ninject;
+using CurrencyWebApi.Backgrounds;
 
 [assembly: OwinStartup(typeof(CurrencyWebApi.Startup))]
 
@@ -24,6 +26,14 @@ namespace CurrencyWebApi
 
             NinjectConfig.Register(app, config, kernel);
             WebApiConfig.Register(config);
+
+            RunBackgroundTasks(kernel);
+        }
+
+        private void RunBackgroundTasks(IKernel kernel)
+        {
+            var backgroundParsing = kernel.Get<ParsingBackground>();
+            backgroundParsing.Run();
         }
     }
 }
